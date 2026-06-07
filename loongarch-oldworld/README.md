@@ -57,4 +57,6 @@ The build keeps the desktop rendering features needed by ClassIsland:
 - bundled codec dependencies
 - static `libstdc++` and `libgcc`
 
+The build defines `FT_GLYPH_FORMAT_SVG` and `FT_FACE_FLAG_SVG` for older old-world FreeType headers so Skia 3.119 SVG-glyph code can compile. The old FreeType runtime does not report SVG glyph state, so this is a header compatibility shim rather than a feature disable.
+
 The CI gate fails if the output is not LoongArch LP64 or if any required GLIBC symbol version is newer than `GLIBC_2.28`.
