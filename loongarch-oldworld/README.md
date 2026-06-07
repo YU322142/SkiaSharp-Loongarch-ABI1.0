@@ -1,5 +1,7 @@
 # SkiaSharp LoongArch old-world ABI1.0
 
+中文说明见 [../README.zh-CN.md](../README.zh-CN.md).
+
 This fork carries a reproducible build path for `libSkiaSharp.so` targeting LoongArch old-world ABI1.0 (`linux-loongarch64`, LP64, glibc 2.28 compatible).
 
 The default GitHub Actions build downloads the `loong64/cross-tools` `baseline` toolchain and uses the sysroot bundled in that toolchain. A separate sysroot upload is not required for the normal build.

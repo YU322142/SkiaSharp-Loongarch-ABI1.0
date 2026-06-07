@@ -1,9 +1,9 @@
 # SkiaSharp
 
-> LoongArch old-world ABI1.0 support for this fork lives in
-> [loongarch-oldworld/README.md](loongarch-oldworld/README.md). The GitHub
-> Actions workflow builds `libSkiaSharp.so` online with `loong64/cross-tools`
-> `baseline` and verifies `GLIBC <= 2.28`.
+> 本 fork 的龙芯旧世界 ABI1.0 支持文档位于
+> [loongarch-oldworld/README.md](loongarch-oldworld/README.md)。GitHub Actions
+> 会使用 `loong64/cross-tools` 的 `baseline` 工具链在线构建
+> `libSkiaSharp.so`，并校验 `GLIBC <= 2.28`。
 
 [![SkiaSharp](https://img.shields.io/nuget/vpre/SkiaSharp.svg?cacheSeconds=3600&label=SkiaSharp%20nuget)](https://www.nuget.org/packages/SkiaSharp)
 [![HarfBuzzSharp](https://img.shields.io/nuget/vpre/HarfBuzzSharp.svg?cacheSeconds=3600&label=HarfBuzzSharp%20nuget)](https://www.nuget.org/packages/HarfBuzzSharp)

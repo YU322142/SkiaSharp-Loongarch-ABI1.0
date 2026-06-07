@@ -198,13 +198,14 @@ EOF
 
 build_skiasharp() {
   local skia="$SRC_DIR/externals/skia"
-  local build_dir="$skia/out/loongarch-oldworld-skiasharp"
+  local build_name="out/loongarch-oldworld-skiasharp"
+  local build_dir="$skia/$build_name"
   write_gn_args "$build_dir"
 
   log "Generating GN project"
-  "$skia/bin/gn" gen "$build_dir"
+  (cd "$skia" && bin/gn gen "$build_name")
   log "Building SkiaSharp target"
-  "$skia/third_party/ninja/ninja" -C "$build_dir" SkiaSharp -j "$JOBS" -k 1
+  (cd "$skia" && third_party/ninja/ninja -C "$build_name" SkiaSharp -j "$JOBS" -k 1)
 
   local so="$build_dir/libSkiaSharp.so.119.0.0"
   if [ ! -f "$so" ]; then
@@ -221,22 +222,22 @@ build_skiasharp() {
   local versions
   versions="$("$READELF" --version-info "$so" | grep -Eo 'GLIBC_[0-9]+(\.[0-9]+)+' | sort -Vu | tr '\n' ' ')"
   cat > "$OUT_DIR/native-build-manifest.txt" <<EOF
-SkiaSharp LoongArch old-world ABI1.0 native build
-Generated: $(date -u '+%Y-%m-%dT%H:%M:%SZ')
+SkiaSharp 龙芯旧世界 ABI1.0 原生库构建记录
+生成时间: $(date -u '+%Y-%m-%dT%H:%M:%SZ')
 
-Source:
-  SkiaSharp repository: $SKIASHARP_REPO
+源码:
+  SkiaSharp 仓库: $SKIASHARP_REPO
   SkiaSharp ref: $SKIASHARP_REF
   SkiaSharp commit: $(git -C "$SRC_DIR" rev-parse HEAD)
 
-Toolchain:
+工具链:
   URL: $TOOLCHAIN_URL
   Root: $TOOLCHAIN_ROOT
   GCC: $("$CC" --version | head -n 1)
   Sysroot: $SYSROOT
-  Sysroot source: $(if [ -n "$SYSROOT_URL" ]; then printf '%s' "$SYSROOT_URL"; else printf 'cross-tools bundled sysroot'; fi)
+  Sysroot 来源: $(if [ -n "$SYSROOT_URL" ]; then printf '%s' "$SYSROOT_URL"; else printf 'cross-tools 内置 sysroot'; fi)
 
-GN feature intent:
+GN 功能配置:
   target_os=linux
   target_cpu=loong64
   skia_enable_ganesh=true
@@ -246,16 +247,16 @@ GN feature intent:
   skia_use_fontconfig=true
   skia_use_freetype=true
   skia_enable_skottie=true
-  bundled codecs=true
-  libstdc++/libgcc=static linked
+  内置编解码依赖=true
+  libstdc++/libgcc=静态链接
 
-Output:
+产物:
   $(sha256sum "$OUT_DIR/libSkiaSharp.so")
 
-ABI checks:
+ABI 检查:
   ELF=LoongArch LP64
   max GLIBC <= $MAX_GLIBC
-  observed GLIBC versions: $versions
+  实际 GLIBC 符号版本: $versions
 EOF
 
   log "Output written to $OUT_DIR"
