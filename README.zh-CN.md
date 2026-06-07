@@ -23,8 +23,6 @@ prebuilt/linux-loongarch64/oldworld/libSkiaSharp.so
 
 该产物已在 Loongnix 20 旧世界 ABI1.0 X11 虚拟机中随 ClassIsland 测试通过，覆盖渲染、托盘和声音相关流程。
 
-在线构建会为旧世界 FreeType 头文件补充 `FT_GLYPH_FORMAT_SVG` / `FT_FACE_FLAG_SVG` 宏定义，目的是兼容 Skia 3.119 的 SVG 字形代码路径编译；旧 FreeType 不会实际返回 SVG 字形状态，因此这不是关闭或降级 FreeType/fontconfig 功能。
-
 构建参数不会把 `$SYSROOT/usr/include/freetype2` 作为全局 include 路径加入 GN。系统头文件通过 `--sysroot` 暴露，Skia bundled FreeType 的头文件会优先用于 bundled FreeType 源码，避免旧 sysroot 的 FreeType public header 与 bundled FreeType internal header 混用。
 
 ## 在线构建
