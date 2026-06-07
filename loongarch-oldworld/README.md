@@ -59,4 +59,6 @@ The build keeps the desktop rendering features needed by ClassIsland:
 
 The build defines `FT_GLYPH_FORMAT_SVG` and `FT_FACE_FLAG_SVG` for older old-world FreeType headers so Skia 3.119 SVG-glyph code can compile. The old FreeType runtime does not report SVG glyph state, so this is a header compatibility shim rather than a feature disable.
 
+The GN args intentionally do not add `$SYSROOT/usr/include/freetype2` as a global include path. System headers are exposed through `--sysroot`, while Skia's bundled FreeType headers stay ahead for bundled FreeType sources. This avoids mixing old sysroot FreeType public headers with bundled FreeType internal headers.
+
 The CI gate fails if the output is not LoongArch LP64 or if any required GLIBC symbol version is newer than `GLIBC_2.28`.

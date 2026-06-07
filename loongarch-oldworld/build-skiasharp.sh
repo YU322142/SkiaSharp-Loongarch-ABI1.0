@@ -213,7 +213,7 @@ skia_use_gl=true
 skia_use_x11=true
 skia_use_fontconfig=true
 skia_use_freetype=true
-extra_cflags=[ "--sysroot=$sysroot_gn", "-I$sysroot_gn/usr/include", "-I$sysroot_gn/usr/include/freetype2", "-DSKIA_C_DLL", "-DHAVE_SYSCALL_GETRANDOM", "-DXML_DEV_URANDOM", "-DFT_GLYPH_FORMAT_SVG=0x53564720", "-DFT_FACE_FLAG_SVG=0x10000" ]
+extra_cflags=[ "--sysroot=$sysroot_gn", "-DSKIA_C_DLL", "-DHAVE_SYSCALL_GETRANDOM", "-DXML_DEV_URANDOM", "-DFT_GLYPH_FORMAT_SVG=0x53564720", "-DFT_FACE_FLAG_SVG=0x10000" ]
 extra_asmflags=[]
 extra_ldflags=[ "--sysroot=$sysroot_gn", "-static-libstdc++", "-static-libgcc", "-L$sysroot_gn/usr/lib64", "-L$sysroot_gn/lib64", "-L$sysroot_gn/usr/lib/loongarch64-linux-gnu", "-L$sysroot_gn/lib/loongarch64-linux-gnu", "-Wl,-rpath-link,$sysroot_gn/usr/lib64", "-Wl,-rpath-link,$sysroot_gn/lib64", "-Wl,-rpath-link,$sysroot_gn/usr/lib/loongarch64-linux-gnu", "-Wl,-rpath-link,$sysroot_gn/lib/loongarch64-linux-gnu", "-Wl,--version-script=$map_gn" ]
 cc="$cc_gn"
