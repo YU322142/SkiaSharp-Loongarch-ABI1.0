@@ -4,7 +4,14 @@
 
 This fork carries a reproducible build path for `libSkiaSharp.so` targeting LoongArch old-world ABI1.0 (`linux-loongarch64`, LP64, glibc 2.28 compatible).
 
-The default GitHub Actions build downloads the `loong64/cross-tools` `baseline` toolchain and uses the sysroot bundled in that toolchain. A separate sysroot upload is not required for the normal build.
+The default GitHub Actions build downloads the `loong64/cross-tools` `baseline` toolchain, uses the sysroot bundled in that toolchain as the base, then layers an old-world development sysroot overlay on top of it. The overlay keeps fontconfig, FreeType, X11, OpenGL and Vulkan development files available without disabling ClassIsland desktop rendering features.
+
+Default overlay:
+
+```text
+https://github.com/YU322142/SkiaSharp-Loongarch-ABI1.0/releases/download/oldworld-dev-sysroot-20260607/loongarch64-oldworld-dev-sysroot-overlay-20260607.tar.xz
+SHA256: AD9DD4DB6C74D085279FF017AB4F743DB2CBA9013A1739BE3C62E56B84CA2F30
+```
 
 ## Build
 
@@ -17,8 +24,8 @@ Useful overrides:
 - `SKIASHARP_REF=v3.119.4` selects the SkiaSharp source tag.
 - `TOOLCHAIN_URL=...` selects a different cross-tools archive.
 - `TOOLCHAIN_SHA256=...` enforces the toolchain archive hash.
-- `SYSROOT_URL=...` optionally replaces the cross-tools bundled sysroot.
-- `SYSROOT_SHA256=...` enforces the external sysroot archive hash.
+- `SYSROOT_URL=...` selects a development sysroot overlay to layer on top of the cross-tools bundled sysroot.
+- `SYSROOT_SHA256=...` enforces the overlay archive hash.
 - `MAX_GLIBC=2.28` controls the ABI gate.
 
 ## Output

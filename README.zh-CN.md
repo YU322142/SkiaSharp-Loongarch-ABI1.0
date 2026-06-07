@@ -11,7 +11,7 @@
 - GLIBC 上限：`GLIBC_2.28`
 - SkiaSharp 源码基线：`mono/SkiaSharp` `v3.119.4`
 - 默认工具链：`loong64/cross-tools` `baseline`
-- 默认 sysroot：cross-tools 内置 sysroot
+- 默认 sysroot：cross-tools 内置 sysroot + 旧世界开发依赖 overlay
 
 ## 已提交产物
 
@@ -27,4 +27,13 @@ prebuilt/linux-loongarch64/oldworld/libSkiaSharp.so
 
 推送到 `main` 或手动运行 GitHub Actions `Build LoongArch old-world ABI1.0` 即可构建。
 
-正常情况下不需要单独上传 sysroot。如果后续需要固定某个 Loongnix sysroot，可在 workflow dispatch 时提供 `sysrootUrl`，或通过环境变量 `SYSROOT_URL` / `SYSROOT_SHA256` 覆盖。
+Actions 默认会下载本仓库 release 中的 `loongarch64-oldworld-dev-sysroot-overlay-20260607.tar.xz`，并把它叠加到 `loong64/cross-tools` 自带 sysroot 上。这个 overlay 来自本地旧世界开发 sysroot，只包含 fontconfig、FreeType、X11、OpenGL、Vulkan 等开发头文件和库，避免为了编译而关闭桌面渲染功能。
+
+默认 overlay：
+
+```text
+https://github.com/YU322142/SkiaSharp-Loongarch-ABI1.0/releases/download/oldworld-dev-sysroot-20260607/loongarch64-oldworld-dev-sysroot-overlay-20260607.tar.xz
+SHA256: AD9DD4DB6C74D085279FF017AB4F743DB2CBA9013A1739BE3C62E56B84CA2F30
+```
+
+如果后续需要固定其他 Loongnix 开发 sysroot，可在 workflow dispatch 时提供 `sysrootUrl`，或通过环境变量 `SYSROOT_URL` / `SYSROOT_SHA256` 覆盖。若明确设为空值，则只使用 cross-tools 内置 sysroot。
