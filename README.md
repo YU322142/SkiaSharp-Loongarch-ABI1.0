@@ -2,7 +2,7 @@
 
 > 本 fork 的龙芯旧世界 ABI1.0 支持文档位于
 > [loongarch-oldworld/README.md](loongarch-oldworld/README.md)。GitHub Actions
-> 会使用 `loong64/cross-tools` 的 `legacy` 工具链在线构建
+> 会使用 `YU322142/loongarch-oldworld-sysroot` 发布的旧世界工具链和 sysroot 在线构建
 > `libSkiaSharp.so`，并校验 `GLIBC <= 2.28`。
 
 [![SkiaSharp](https://img.shields.io/nuget/vpre/SkiaSharp.svg?cacheSeconds=3600&label=SkiaSharp%20nuget)](https://www.nuget.org/packages/SkiaSharp)
