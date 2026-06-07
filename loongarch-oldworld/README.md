@@ -4,13 +4,20 @@
 
 This fork carries a reproducible build path for `libSkiaSharp.so` targeting LoongArch old-world ABI1.0 (`linux-loongarch64`, LP64, glibc 2.28 compatible).
 
-The default GitHub Actions build downloads the `loong64/cross-tools` `baseline` toolchain, uses the sysroot bundled in that toolchain as the base, then layers an old-world development sysroot overlay on top of it. The overlay keeps fontconfig, FreeType, X11, OpenGL and Vulkan development files available without disabling ClassIsland desktop rendering features.
+The default GitHub Actions build downloads the `loong64/cross-tools` 2025-05-07 `legacy` toolchain and the full old-world development sysroot published by `YU322142/loongarch-oldworld-sysroot`. The build passes `--sysroot` directly to that downloaded sysroot, so the cross-tools bundled sysroot is not used for normal linking.
 
-Default overlay:
+Default toolchain:
 
 ```text
-https://github.com/YU322142/SkiaSharp-Loongarch-ABI1.0/releases/download/oldworld-dev-sysroot-20260607/loongarch64-oldworld-dev-sysroot-overlay-20260607.tar.xz
-SHA256: AD9DD4DB6C74D085279FF017AB4F743DB2CBA9013A1739BE3C62E56B84CA2F30
+https://github.com/loong64/cross-tools/releases/download/20250507/x86_64-cross-tools-loongarch64-unknown-linux-gnu-legacy.tar.xz
+SHA256: 3EDD0C1A612ED9E01B45D65CAED210F775738EF6FEB9173896E565B38C676A55
+```
+
+Default sysroot:
+
+```text
+https://github.com/YU322142/loongarch-oldworld-sysroot/releases/download/oldworld-dev-sysroot-20260607/loongarch64-oldworld-dev-sysroot-20260607.tar.xz
+SHA256: 5D442178DB80F8C1BC599B5C0E5963071BBBB33270DE05747959ADC65E7BC086
 ```
 
 ## Build
@@ -24,8 +31,8 @@ Useful overrides:
 - `SKIASHARP_REF=v3.119.4` selects the SkiaSharp source tag.
 - `TOOLCHAIN_URL=...` selects a different cross-tools archive.
 - `TOOLCHAIN_SHA256=...` enforces the toolchain archive hash.
-- `SYSROOT_URL=...` selects a development sysroot overlay to layer on top of the cross-tools bundled sysroot.
-- `SYSROOT_SHA256=...` enforces the overlay archive hash.
+- `SYSROOT_URL=...` selects the full development sysroot archive.
+- `SYSROOT_SHA256=...` enforces the sysroot archive hash.
 - `MAX_GLIBC=2.28` controls the ABI gate.
 
 ## Output
