@@ -21,6 +21,8 @@
 prebuilt/linux-loongarch64/oldworld/libSkiaSharp.so
 ```
 
+Actions 和 Release 产物中还会包含 `libSkiaSharp.so.119.0.0`。这是同一个 SkiaSharp 原生库的 SONAME/版本化文件名，`119.0.0` 对应当前 `SkiaSharp.NativeAssets.Linux` 3.119.x 使用的 native ABI 版本。`libSkiaSharp.so` 是 .NET 运行时和 NativeAssets 查找时使用的入口名；`libSkiaSharp.so.119.0.0` 用于保留动态链接器可识别的版本化共享库文件名。两个文件都保留，方便直接替换 NuGet native assets、做 ABI 检查和人工排障。
+
 该产物已在 Loongnix 20 旧世界 ABI1.0 X11 虚拟机中随 ClassIsland 测试通过，覆盖渲染、托盘和声音相关流程。
 
 构建参数不会把 `$SYSROOT/usr/include/freetype2` 作为全局 include 路径加入 GN。系统头文件通过 `--sysroot` 暴露，Skia bundled FreeType 的头文件会优先用于 bundled FreeType 源码，避免旧 sysroot 的 FreeType public header 与 bundled FreeType internal header 混用。

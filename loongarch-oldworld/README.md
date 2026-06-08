@@ -43,6 +43,8 @@ The script writes:
 - `artifacts/loongarch-oldworld/out/libSkiaSharp.so.119.0.0`
 - `artifacts/loongarch-oldworld/out/native-build-manifest.txt`
 
+`libSkiaSharp.so.119.0.0` is the SONAME/versioned filename for the same native SkiaSharp shared library. The `119.0.0` suffix matches the native ABI used by the current `SkiaSharp.NativeAssets.Linux` 3.119.x package line. `libSkiaSharp.so` is the stable loader name used by .NET P/Invoke and NuGet native assets; the versioned filename is kept so the release can also be inspected and reused like a normal Linux shared library artifact.
+
 The committed `prebuilt/linux-loongarch64/oldworld/libSkiaSharp.so` is the locally verified build used for ClassIsland testing.
 
 ## Feature intent

@@ -3,7 +3,9 @@
 > 本 fork 的龙芯旧世界 ABI1.0 支持文档位于
 > [loongarch-oldworld/README.md](loongarch-oldworld/README.md)。GitHub Actions
 > 会使用 `YU322142/loongarch-oldworld-sysroot` 发布的旧世界工具链和 sysroot 在线构建
-> `libSkiaSharp.so`，并校验 `GLIBC <= 2.28`。
+> `libSkiaSharp.so`，并校验 `GLIBC <= 2.28`。Release 中的
+> `libSkiaSharp.so.119.0.0` 是同一原生库的 SONAME/版本化文件名，保留它是为了匹配
+> Linux 共享库和 SkiaSharp NativeAssets 的 ABI 命名习惯。
 
 [![SkiaSharp](https://img.shields.io/nuget/vpre/SkiaSharp.svg?cacheSeconds=3600&label=SkiaSharp%20nuget)](https://www.nuget.org/packages/SkiaSharp)
 [![HarfBuzzSharp](https://img.shields.io/nuget/vpre/HarfBuzzSharp.svg?cacheSeconds=3600&label=HarfBuzzSharp%20nuget)](https://www.nuget.org/packages/HarfBuzzSharp)
