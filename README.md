@@ -6,6 +6,17 @@
 > `libSkiaSharp.so`，并校验 `GLIBC <= 2.28`。Release 中的
 > `libSkiaSharp.so.119.0.0` 是同一原生库的 SONAME/版本化文件名，保留它是为了匹配
 > Linux 共享库和 SkiaSharp NativeAssets 的 ABI 命名习惯。
+> 工具链不是本 fork 自研的编译器，而是固定/重新打包的第三方旧世界交叉工具链聚合；
+> sysroot 来自旧世界 Loongnix/LoongArch 开发环境。来源和许可证边界见
+> [YU322142/loongarch-oldworld-sysroot](https://github.com/YU322142/loongarch-oldworld-sysroot)。
+>
+> LoongArch old-world ABI1.0 documentation for this fork is in
+> [loongarch-oldworld/README.md](loongarch-oldworld/README.md). GitHub Actions builds
+> `libSkiaSharp.so` with the pinned old-world toolchain and sysroot from
+> `YU322142/loongarch-oldworld-sysroot`, then rejects outputs requiring `GLIBC > 2.28`.
+> The toolchain is not written by this fork; it is a pinned/repacked third-party
+> old-world cross-toolchain aggregate, and the sysroot comes from an old-world
+> Loongnix/LoongArch development environment.
 
 [![SkiaSharp](https://img.shields.io/nuget/vpre/SkiaSharp.svg?cacheSeconds=3600&label=SkiaSharp%20nuget)](https://www.nuget.org/packages/SkiaSharp)
 [![HarfBuzzSharp](https://img.shields.io/nuget/vpre/HarfBuzzSharp.svg?cacheSeconds=3600&label=HarfBuzzSharp%20nuget)](https://www.nuget.org/packages/HarfBuzzSharp)

@@ -4,7 +4,20 @@
 
 This fork carries a reproducible build path for `libSkiaSharp.so` targeting LoongArch old-world ABI1.0 (`linux-loongarch64`, LP64, glibc 2.28 compatible).
 
+## Current target
+
+- Platform: `linux-loongarch64`
+- ABI: LoongArch old-world ABI1.0, LP64
+- GLIBC ceiling: `GLIBC_2.28`
+- Source baseline: `mono/SkiaSharp` `v3.119.4`
+- Default toolchain: Linux x64 old-world GCC 14 toolchain from `YU322142/loongarch-oldworld-sysroot`
+- Default sysroot: full old-world development sysroot from `YU322142/loongarch-oldworld-sysroot`
+
+## Online build
+
 The default GitHub Actions build downloads the matching Linux x64 old-world GCC 14 toolchain and full old-world development sysroot published by `YU322142/loongarch-oldworld-sysroot`. The build passes `--sysroot` directly to that downloaded sysroot, so public cross-tools bundled sysroots are not used for normal linking.
+
+The toolchain is not a compiler written by this fork. It is a pinned/repacked third-party LoongArch old-world cross-toolchain aggregate for reproducible Actions builds. The sysroot is a development sysroot collected from an old-world Loongnix/LoongArch environment. Source notes, SHA256 values, and licensing boundaries are documented in [`YU322142/loongarch-oldworld-sysroot`](https://github.com/YU322142/loongarch-oldworld-sysroot).
 
 Default toolchain:
 
@@ -20,7 +33,7 @@ https://github.com/YU322142/loongarch-oldworld-sysroot/releases/download/oldworl
 SHA256: 5D442178DB80F8C1BC599B5C0E5963071BBBB33270DE05747959ADC65E7BC086
 ```
 
-## Build
+## Local build
 
 ```bash
 bash loongarch-oldworld/build-skiasharp.sh
@@ -35,7 +48,7 @@ Useful overrides:
 - `SYSROOT_SHA256=...` enforces the sysroot archive hash.
 - `MAX_GLIBC=2.28` controls the ABI gate.
 
-## Output
+## Submitted output
 
 The script writes:
 
@@ -46,6 +59,8 @@ The script writes:
 `libSkiaSharp.so.119.0.0` is the SONAME/versioned filename for the same native SkiaSharp shared library. The `119.0.0` suffix matches the native ABI used by the current `SkiaSharp.NativeAssets.Linux` 3.119.x package line. `libSkiaSharp.so` is the stable loader name used by .NET P/Invoke and NuGet native assets; the versioned filename is kept so the release can also be inspected and reused like a normal Linux shared library artifact.
 
 The committed `prebuilt/linux-loongarch64/oldworld/libSkiaSharp.so` is the locally verified build used for ClassIsland testing.
+
+The release artifact also includes `libSkiaSharp.so.119.0.0`, the versioned filename described above.
 
 ## Feature intent
 
